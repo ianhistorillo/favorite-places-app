@@ -7,6 +7,7 @@ import {
 } from "expo-image-picker";
 
 import { Colors } from "../../constants/colors";
+import OutlineButton from "../UI/OutlineButton";
 
 const ImagePicker = () => {
   const [pickedImage, setPickedImage] = useState();
@@ -42,8 +43,7 @@ const ImagePicker = () => {
       quality: 0.5,
     });
 
-    setPickedImage(image.uri);
-    console.log(image);
+    setPickedImage(image.assets[0].uri);
   }
 
   let imagePreview = <Text> No image taken yet.</Text>;
@@ -53,7 +53,9 @@ const ImagePicker = () => {
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <Button title="Take Image" onPress={takeImageHandler} />
+      <OutlineButton icon="camera" onPress={takeImageHandler}>
+        Take Image
+      </OutlineButton>
     </View>
   );
 };
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: "hidden",
   },
   image: {
     height: "100%",
